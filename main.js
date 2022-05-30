@@ -2,13 +2,27 @@ const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
 const quoteAuthor = document.getElementById('author');
 const newQuoteBtn = document.getElementById('new-quote');
+const loader = document.getElementById('loader');
 
 //get Quotes from API
 let apiQuotes = [];
 
+//show loading
+function loading() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
+
+//hide loading
+function complete() {
+    quoteContainer.hidden = false;
+    loader.hidden = true;
+}
+
 //Show New Quote
 
 function newQuote(){
+
     //pick a random quote from apiQuote array
 
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
@@ -48,4 +62,5 @@ async function getQuotes() {
 newQuoteBtn.addEventListener('click', newQuote);
 
 //On Load
-getQuotes();
+// getQuotes();
+loading();
