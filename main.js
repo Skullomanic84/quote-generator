@@ -22,7 +22,7 @@ function complete() {
 //Show New Quote
 
 function newQuote(){
-
+    loading();
     //pick a random quote from apiQuote array
 
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
@@ -42,11 +42,17 @@ function newQuote(){
         quoteText.classList.remove('long-quote')
     }
 
+    // set quote, hide loader
+    quoteText.textContent = quote.text;
+    complete();
+
+
     quoteText.textContent = quote.text;
 }
 
 //Get Quotes from API
 async function getQuotes() {
+    loading();
     const apiUrl = 'https://type.fit/api/quotes';
     try {
         const response = await fetch(apiUrl);
@@ -62,5 +68,4 @@ async function getQuotes() {
 newQuoteBtn.addEventListener('click', newQuote);
 
 //On Load
-// getQuotes();
-loading();
+getQuotes();
